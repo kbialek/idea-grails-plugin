@@ -1,0 +1,80 @@
+<idea-plugin>
+    <id>grails-community</id>
+    <name>Grails CE</name>
+    <version>1.0.0</version>
+
+    <description><![CDATA[
+        Grails plugin compatible with Community Edition.
+        Supports the following Grails features:
+        <ol>
+            <li>Url Mappings:
+                <ul>
+                    <li>Navigate to controller class
+                    <li>Navigate to controller action
+                </ul>
+            <li>Controllers:
+                <ul>
+                    <li>Action variables
+                    <li>Action methods
+                </ul>
+            </li>
+            <li>Command classes:
+                <ul>
+                    <li>recognizes properties in constraints closure
+                    <li>constraints navigation, type checking and autocompletion
+                </ul>
+            </li>
+            <li>Domain Classes:
+                <ul>
+                    <li>hasMany, hasOne and belongsTo properties
+                    <li>addTo* and removeFrom* methods
+                    <li>dynamic methods (grails.gorm.api.GormInstanceOperations)
+                    <li>static methods (grails.gorm.api.GormStaticOperations)
+                    <li>recognizes properties in constraints closure
+                    <li>recognizes properties in mapping closure
+                    <li>supports framework methods in mapping closure
+                    <li>constraints navigation, type checking and autocompletion
+                </ul>
+            </li>
+            <li>Testing:
+                <ul>
+                    <li>Controller unit tests
+                </ul>
+            </li>
+        </ol>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="145.0"/>
+
+    <depends>org.intellij.groovy</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="Groovy"
+                                implementationClass="eu.espro.ideagrails.GrailsCompletionContributor"
+                                order="before groovyBasic"/>
+        <psi.referenceContributor implementation="eu.espro.ideagrails.GrailsReferenceContributor"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="org.intellij.groovy">
+        <membersContributor implementation="eu.espro.ideagrails.references.domain.DomainClassMembersContributor"/>
+        <membersContributor
+                implementation="eu.espro.ideagrails.references.controller.ControllerClassMembersContributor"/>
+        <membersContributor
+                implementation="eu.espro.ideagrails.references.controller.ControllerTestMembersContributor"/>
+        <closureMissingMethodContributor
+                implementation="eu.espro.ideagrails.references.domain.ConstraintsMissingMethodContributor"/>
+        <closureMissingMethodContributor
+                implementation="eu.espro.ideagrails.references.domain.MappingMissingMethodContributor"/>
+        <namedArgumentProvider
+                implementation="eu.espro.ideagrails.references.domain.ConstraintsNamedArgumentProvider"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
