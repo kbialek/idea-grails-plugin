@@ -1,4 +1,5 @@
 # idea-grails-plugin
+## Overview
 Grails plugin compatible with Community Edition.
 
 Supports the following Grails features:
@@ -38,5 +39,14 @@ Supports the following Grails features:
         </ul>
     </li>
 </ol>
+
+
+## Build instructions
+
+ 1. Open the project in IDEA
+ 2. Open project configuration window and set IDEA plugin SDK
+ 3. Build the project
+ 4. Use Build->Prepare Plugin Module ... to build plugin jar file
+
 
 
