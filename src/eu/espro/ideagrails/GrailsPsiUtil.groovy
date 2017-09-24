@@ -105,4 +105,10 @@ class GrailsPsiUtil {
         }
         return actionName
     }
+
+    static boolean isClassImplementationOf(PsiClass cd, String interfaceFQN) {
+        cd.implementsListTypes.any { PsiClassType it ->
+            it.resolve()?.qualifiedName == interfaceFQN
+        }
+    }
 }

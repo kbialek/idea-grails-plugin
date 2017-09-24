@@ -43,7 +43,8 @@ class ControllerCompletionProvider extends CompletionProvider<CompletionParamete
         if (parent instanceof GrReferenceExpression) {
             def controllerClass = PsiTreeUtil.getParentOfType(parent, GrClassDefinition)
             def cd = GrailsPsiUtil.resolveReference(parent as GrReferenceExpression)
-            if (cd && cd.name?.endsWith("Controller") && cd == controllerClass) {
+            if (cd && cd.name?.endsWith("Controller") && cd == controllerClass &&
+                    !GrailsPsiUtil.isClassImplementationOf(cd, 'grails.artefact.Controller')) {
                 def method = GrailsPsiUtil.findEnclosingMethod(parent)
                 if (method && !method.hasModifierProperty('static')) {
                     GrailsControllerApi.ControllerActionVars.each { name, typeFqn ->

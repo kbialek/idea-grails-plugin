@@ -22,6 +22,7 @@ import com.intellij.psi.ResolveState
 import com.intellij.psi.scope.PsiScopeProcessor
 import com.intellij.psi.util.PsiTreeUtil
 import eu.espro.ideagrails.GrailsControllerApi
+import eu.espro.ideagrails.GrailsPsiUtil
 import groovy.transform.CompileStatic
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrReferenceExpression
@@ -39,7 +40,8 @@ class ControllerClassMembersContributor extends NonCodeMembersContributor {
             @NotNull PsiType qualifierType, PsiClass aClass,
             @NotNull PsiScopeProcessor processor, @NotNull PsiElement place, @NotNull ResolveState state) {
 
-        if (aClass instanceof GrClassDefinition && aClass.name.endsWith("Controller")) {
+        if (aClass instanceof GrClassDefinition && aClass.name.endsWith("Controller")
+                && !GrailsPsiUtil.isClassImplementationOf(aClass, 'grails.artefact.Controller')) {
             if (place instanceof GrReferenceExpression) {
                 def method = PsiTreeUtil.getParentOfType(place, GrMethod)
                 if (method && !method.hasModifierProperty('static')) {
